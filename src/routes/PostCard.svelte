@@ -6,7 +6,7 @@
 <a
 	class="group flex flex-col justify-between bg-[#1e1e1f] hover:bg-[#24242a]
     rounded-lg text-white gap-2 lg:gap-4 p-2 lg:p-3 hover:scale-105 transform transition-all duration-300 ease-in-out"
-	href={`/posts/${data.slug}`}
+	href={data.slug}
 >
 	<div class="overflow-hidden">
 		<img

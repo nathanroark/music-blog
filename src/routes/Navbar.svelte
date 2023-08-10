@@ -3,19 +3,30 @@
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
 	let open = false;
+	$: homepage = false; // $page.url.pathname === '/';
 </script>
 
-<button
-	class="toggleButton fixed top-0 left-0 p-4 text-gray-100 hover:text-gray-300 cursor-pointer mr-4 border-none focus:outline-none"
-	class:open
-	on:click={() => (open = !open)}
+<header
+	class="z-50 fixed pl-2 top-0 items-center border-b border-zinc-600 bg-black flex h-[3rem] w-full text-2xl text-neutral-100"
 >
-	<svg width="32" height="24">
-		<line id="top" x1="0" y1="2" x2="32" y2="2" />
-		<line id="middle" x1="0" y1="12" x2="24" y2="12" />
-		<line id="bottom" x1="0" y1="22" x2="32" y2="22" />
-	</svg>
-</button>
+	{#if homepage}
+		<button
+			class="toggleButton top-0 left-0 p-4 text-gray-100 hover:text-gray-300 cursor-pointer mr-4 border-none focus:outline-none"
+			class:open
+			on:click={() => (open = !open)}
+		>
+			<svg width="32" height="24">
+				<line id="top" x1="0" y1="2" x2="32" y2="2" />
+				<line id="middle" x1="0" y1="12" x2="24" y2="12" />
+				<line id="bottom" x1="0" y1="22" x2="32" y2="22" />
+			</svg>
+		</button>
+	{/if}
+
+	<a href="/" class="font-bold text-lg sm:text-[1.5rem]">
+		Nathan&apos;s <span>Music</span> Blog
+	</a>
+</header>
 <aside class="absolute w-1/8 h-full bg-black border-r-2 shadow-lg border-zinc-500" class:open>
 	<div class="top">
 		<div class="corner">
