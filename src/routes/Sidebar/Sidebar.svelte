@@ -3,7 +3,7 @@
 	import github from '$lib/images/github.svg';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import type { Post } from '$lib/types';
-	import GenreSelect from './GenreSelect.svelte';
+	import GenreSelect from './GenreSelectNav.svelte';
 	export let posts: Post[] = [];
 
 	let sortMethod = 'Post';
@@ -155,7 +155,7 @@
 	</div>
 
 	<div class="p-12 text-xl space-y-6">
-		<label class="label">
+		<!-- <label class="label">
 			<span>Sort Method</span>
 			<select class="select" bind:value={sortMethod} on:change={sortMethodSelected}>
 				{#each sortOptions as option}
@@ -164,7 +164,7 @@
 					</option>
 				{/each}
 			</select>
-		</label>
+		</label> -->
 		<div class="flex flex-col">
 			<span>Filter Method</span>
 			<RadioGroup class="w-fit" active="variant-filled-primary" hover="hover:variant-soft-primary">
@@ -191,7 +191,7 @@
 				{/each}
 			</ul>
 		</div>
-		<GenreSelect bind:list={genreList} />
+		<GenreSelect />
 	</div>
 </div>
 

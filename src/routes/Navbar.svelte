@@ -6,6 +6,7 @@
 	let open = false;
 	export let data: { posts: Post[] } = { posts: [] };
 	$: posts = data.posts;
+	//$: pageParams = $page.params;
 </script>
 
 <header
@@ -24,7 +25,7 @@
 			</svg>
 		</button>
 	{/if}
-	<a href="/" class="font-bold text-lg sm:text-[1.5rem]">
+	<a href="/" class="font-bold text-lg hover:text-primary-500 sm:text-[1.5rem]">
 		Nathan&apos;s <span>music</span> blog
 	</a>
 </header>
@@ -47,9 +48,9 @@
 		z-index: 999;
 	}
 
-	a:hover {
+	/*a:hover {
 		color: var(--color-theme-1);
-	}
+	}*/
 	.open {
 		left: 0;
 	}
