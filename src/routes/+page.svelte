@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { fly } from 'svelte/transition';
 	import { page } from '$app/stores';
 	import Sidebar from './Sidebar/Sidebar.svelte';
 	import * as config from '$lib/config';
@@ -108,13 +109,13 @@
 		</a>
 	</header>
 
-	<div class="flex justify-center items-center flex-col pt-[3rem]">
-		<aside
-			class="fixed top-0 w-1/6 min-w-fit h-full bg-black border-r-2 shadow-lg border-zinc-500"
-			class:open
-		>
-			<Sidebar />
-		</aside>
+	<div class="flex pt-[3rem]">
+		{#if open}
+			<div class="drawer" transition:fly={{ x: '100%' }} />
+			<aside class="h-full bg-black border-r-2 border-primary-500" class:open>
+				<Sidebar />
+			</aside>
+		{/if}
 		<main>
 			<AlbumView {posts} />
 		</main>
@@ -122,9 +123,19 @@
 </section>
 
 <style>
+	.drawer {
+		top: 0;
+		right: 0;
+		background: #ddd;
+		padding: 16px;
+		height: 100vh;
+		width: 200px;
+		border-left: 1px solid rgba(0, 0, 0, 0.1);
+		box-shadow: -2px 0px 6px -1px rgba(0, 0, 0, 0.1);
+	}
 	aside {
-		left: -100%;
-		transition: left 0.3s ease-in-out;
+		flex-grow: 20;
+		transition: all 1s;
 		z-index: 49;
 	}
 
