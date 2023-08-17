@@ -6,13 +6,11 @@
 
 	import '../app.css'; // for Tailwind CSS
 	import './styles.css';
-	import Navbar from './Navbar.svelte';
 </script>
 
 <html lang="en" class="dark">
 	<div class="min-h-screen items-center justify-center bg-zinc-950 no-scrollbar">
 		<main>
-			<Navbar />
 			<slot />
 		</main>
 	</div>

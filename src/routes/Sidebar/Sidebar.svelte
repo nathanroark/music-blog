@@ -46,8 +46,11 @@
 		</div>
 	</div>
 
-	<div class="p-12 text-xl space-y-6">
-		<ul class="w-full overflow-y-auto max-h-[32rem] bg-zinc-900 p-2">
+	<div class="p-12 space-y-6">
+		<h2 class="text-lg">Sort Method</h2>
+		<ul
+			class="w-full rounded-md border border-secondary-500 overflow-y-auto max-h-[32rem] bg-zinc-900 p-2"
+		>
 			{#each sortMethods as item}
 				<li class="w-full flex justify-between inset-2">
 					<button class="p-2 hover:bg-primary-500 w-full" on:click={() => setSortMethod(item)}
@@ -57,7 +60,7 @@
 			{/each}
 		</ul>
 		<div class="flex flex-col">
-			<span>Filter Method</span>
+			<span class="text-lg">Filter Method</span>
 			<RadioGroup class="w-fit" active="variant-filled-primary" hover="hover:variant-soft-primary">
 				<RadioItem
 					bind:group={filterMethod}
