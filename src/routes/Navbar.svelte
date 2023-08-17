@@ -26,7 +26,7 @@
 	</a>
 </header>
 
-<aside class=" min-w-fit h-full bg-black border-r-2 shadow-lg border-zinc-500" class:open>
+<aside class:open>
 	<Sidebar />
 </aside>
 

@@ -5,6 +5,7 @@
 	import * as config from '$lib/config';
 	import type { Post } from '$lib/types';
 	import AlbumView from './AlbumView.svelte';
+	import { clsx } from 'clsx';
 	export let data: { posts: Post[] } = { posts: [] };
 
 	$: homepage = $page.url.pathname === '/';
@@ -83,6 +84,8 @@
 	}
 </script>
 
+<!--Album to add: Gage Means Nothing, more Nana Grizol-->
+
 <svelte:head>
 	<title>{config.title}</title>
 </svelte:head>
@@ -105,18 +108,19 @@
 			</button>
 		{/if}
 		<a href="/" class="font-bold text-lg hover:text-primary-500 sm:text-[1.5rem]">
-			Nathan&apos;s <span>music</span> blog
+			Nathan's music blog
 		</a>
 	</header>
 
-	<div class="flex pt-[3rem]">
+	<div class="flex justify-between transition-transform duration-300">
 		{#if open}
-			<div class="drawer" transition:fly={{ x: '100%' }} />
-			<aside class="h-full bg-black border-r-2 border-primary-500" class:open>
-				<Sidebar />
-			</aside>
+			<div class="drawer" transition:fly={{ x: '-100%' }}>
+				<aside class="pt-4 h-screen w-fit max-w-sm bg-black border-r-2 border-gray-600">
+					<Sidebar />
+				</aside>
+			</div>
 		{/if}
-		<main>
+		<main class="overflow-y-auto h-screen transition-transform duration-300">
 			<AlbumView {posts} />
 		</main>
 	</div>
@@ -125,17 +129,11 @@
 <style>
 	.drawer {
 		top: 0;
-		right: 0;
-		background: #ddd;
-		padding: 16px;
-		height: 100vh;
-		width: 200px;
-		border-left: 1px solid rgba(0, 0, 0, 0.1);
 		box-shadow: -2px 0px 6px -1px rgba(0, 0, 0, 0.1);
 	}
 	aside {
-		flex-grow: 20;
-		transition: all 1s;
+		left: -100%;
+		transition: left 0.3s ease-in-out;
 		z-index: 49;
 	}
 
@@ -143,9 +141,6 @@
 		z-index: 999;
 	}
 
-	/*a:hover {
-		color: var(--color-theme-1);
-	}*/
 	.open {
 		left: 0;
 	}
