@@ -26,10 +26,7 @@
 	</a>
 </header>
 
-<aside
-	class="fixed w-1/6 min-w-fit h-full bg-black border-r-2 shadow-lg border-zinc-500"
-	class:open
->
+<aside class="fixed min-w-fit h-full bg-black border-r-2 shadow-lg border-zinc-500" class:open>
 	<Sidebar />
 </aside>
 

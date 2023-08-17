@@ -42,11 +42,9 @@
 {/if}
 
 <h2 class="text-lg">Available Genres</h2>
-<ul
-	class="w-full border-secondary-500 border rounded-md overflow-y-auto max-h-[32rem] bg-zinc-900 p-2"
->
+<ul class=" border-secondary-500 border rounded-md overflow-y-auto max-h-[32rem] bg-zinc-900 p-2">
 	{#each availableGenres as item}
-		<li class="w-full flex justify-between inset-2">
+		<li class="flex justify-between inset-2">
 			<button class="p-2 hover:bg-primary-500 w-full" on:click={() => handleAddGenre(item)}
 				>{item}
 			</button>

@@ -49,11 +49,11 @@
 	<div class="p-12 space-y-6">
 		<h2 class="text-lg">Sort Method</h2>
 		<ul
-			class="w-full rounded-md border border-secondary-500 overflow-y-auto max-h-[32rem] bg-zinc-900 p-2"
+			class=" rounded-md border border-secondary-500 overflow-y-auto max-h-[32rem] bg-zinc-900 p-2"
 		>
 			{#each sortMethods as item}
-				<li class="w-full flex justify-between inset-2">
-					<button class="p-2 hover:bg-primary-500 w-full" on:click={() => setSortMethod(item)}
+				<li class="flex justify-between inset-2">
+					<button class="w-full p-2 hover:bg-primary-500" on:click={() => setSortMethod(item)}
 						>{item}
 					</button>
 				</li>
