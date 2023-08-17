@@ -1,17 +1,18 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import logo from '$lib/images/svelte-logo.svg';
 	import github from '$lib/images/github.svg';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
-	import type { Post } from '$lib/types';
-	import GenreSelect from './GenreSelectNav.svelte';
-	export let posts: Post[] = [];
+	import GenreSelect from './GenreSelect.svelte';
 
-	let sortMethod = 'Post';
+	$: query = new URLSearchParams($page.url.searchParams.toString());
+	$: sortMethod = query.get('sort') || 'Post';
+	$: filterMethod = query.get('filter') || 'some';
 
-	const FilterMethods = ['some', 'every'];
-	let selectedFilterMethod = FilterMethods[0];
+	const filterMethods = ['some', 'every'];
 
-	let sortOptions = [
+	const sortMethods = [
 		'Post',
 		'Post Reverse',
 		'Artist',
@@ -20,123 +21,14 @@
 		'Release Reverse'
 	];
 
-	function sortMethodSelected(e: any) {
-		const target = e.target;
-
-		sortMethod = target.value;
-		switch (sortMethod) {
-			case 'Post': {
-				posts = posts.sort(
-					(first, second) =>
-						new Date(second.post_date).getTime() - new Date(first.post_date).getTime()
-				);
-				break;
-			}
-			case 'Post Reverse': {
-				posts = posts.sort(
-					(first, second) =>
-						new Date(first.post_date).getTime() - new Date(second.post_date).getTime()
-				);
-				break;
-			}
-			case 'Artist': {
-				posts = posts.sort((a, b) => {
-					let artistA = a.artist.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-					let artistB = b.artist.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-					return artistA > artistB ? 1 : -1;
-				});
-				break;
-			}
-			case 'Artist Reverse': {
-				posts = posts.sort((a, b) => {
-					let artistA = a.artist.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-					let artistB = b.artist.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-					return artistA < artistB ? 1 : -1;
-				});
-				break;
-			}
-			case 'Release': {
-				posts = posts.sort(
-					(first, second) =>
-						new Date(second.release_date).getTime() - new Date(first.release_date).getTime()
-				);
-				break;
-			}
-			case 'Release Reverse': {
-				posts = posts.sort(
-					(first, second) =>
-						new Date(first.release_date).getTime() - new Date(second.release_date).getTime()
-				);
-				break;
-			}
-			default: {
-				posts = posts.sort((a, b) => (a.post_date < b.post_date ? 1 : -1));
-				break;
-			}
-		}
+	function setSortMethod(newSortMethod: string) {
+		query.set('sort', newSortMethod);
+		goto(`?${query.toString()}`);
 	}
-	const rawGenreList = [
-		'Midwest Emo',
-		'Shoegaze',
-		'Indie Rock',
-		'Post Hardcore',
-		'Screamo',
-		'J-Rock',
-		'Singer Songwriter',
-		'Post Rock',
-		'Emo',
-		'Indietronica',
-		'Indie Folk',
-		'Noise Pop',
-		'Neo-Psychedelia',
-		'Math Rock',
-		'Noise Rock',
-		'Psychedelic Folk',
-		'Blackgaze',
-		'Post Metal',
-		'Experemental Rock',
-		'Slowcore',
-		'Sadcore',
-		'Folktronica',
-		'Post-Punk',
-		'Drone',
-		'Post-Industrial',
-		'Gothic Rock',
-		'Post-Hardcore',
-		'Spoken Word',
-		'Poetry',
-		'Trip Hop',
-		'Indie Pop',
-		'Contemporary Folk',
-		'Americana',
-		'Pop Punk',
-		'Advent-Folk',
-		'Neo-soul',
-		'Psychedelic Soul',
-		'Funk',
-		'Funktronica',
-		'Acid Jazz',
-		'Breakcore',
-		'Atmospheric Drum and Bass',
-		'Electronic'
-	];
 
-	let genreList = rawGenreList.map((genre) => {
-		return { name: genre, selected: false };
-	});
-
-	$: {
-		posts = posts.filter((posts) => {
-			if (selectedFilterMethod === 'some') {
-				return genreList.some((g) => {
-					return g.selected && posts.genres.includes(g.name);
-				});
-			} else {
-				return genreList.every((g) => {
-					return g.selected && posts.genres.includes(g.name);
-				});
-			}
-		});
+	function setFilterMethod(newFilterMethod: string) {
+		query.set('filter', newFilterMethod);
+		goto(`?${query.toString()}`);
 	}
 </script>
 
@@ -155,41 +47,31 @@
 	</div>
 
 	<div class="p-12 text-xl space-y-6">
-		<!-- <label class="label">
-			<span>Sort Method</span>
-			<select class="select" bind:value={sortMethod} on:change={sortMethodSelected}>
-				{#each sortOptions as option}
-					<option value={option}>
-						{option}
-					</option>
-				{/each}
-			</select>
-		</label> -->
+		<ul class="w-full overflow-y-auto max-h-[32rem] bg-zinc-900 p-2">
+			{#each sortMethods as item}
+				<li class="w-full flex justify-between inset-2">
+					<button class="p-2 hover:bg-primary-500 w-full" on:click={() => setSortMethod(item)}
+						>{item}
+					</button>
+				</li>
+			{/each}
+		</ul>
 		<div class="flex flex-col">
 			<span>Filter Method</span>
 			<RadioGroup class="w-fit" active="variant-filled-primary" hover="hover:variant-soft-primary">
-				<RadioItem bind:group={selectedFilterMethod} name="justify" value={FilterMethods[0]}
-					>{FilterMethods[0]}</RadioItem
+				<RadioItem
+					bind:group={filterMethod}
+					name="justify"
+					on:change={() => setFilterMethod('some')}
+					value="some">some</RadioItem
 				>
-				<RadioItem bind:group={selectedFilterMethod} name="justify" value={FilterMethods[1]}
-					>{FilterMethods[1]}</RadioItem
+				<RadioItem
+					bind:group={filterMethod}
+					name="justify"
+					on:change={() => setFilterMethod('every')}
+					value="every">every</RadioItem
 				>
 			</RadioGroup>
-		</div>
-		<div>
-			<span>Genre List</span>
-			<ul>
-				{#each genreList as item, i}
-					{#if item.selected}
-						<li>
-							{item.name}
-							<button class="bg-zinc-700" on:click={() => (genreList[i].selected = false)}
-								>Remove from cart</button
-							>
-						</li>
-					{/if}
-				{/each}
-			</ul>
 		</div>
 		<GenreSelect />
 	</div>

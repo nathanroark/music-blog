@@ -1,12 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import Sidebar from './Sidebar/Sidebar.svelte';
-	import type { Post } from '$lib/types';
 	$: homepage = $page.url.pathname === '/';
-	let open = false;
-	export let data: { posts: Post[] } = { posts: [] };
-	$: posts = data.posts;
-	//$: pageParams = $page.params;
+	$: open = homepage ? false : false;
 </script>
 
 <header
@@ -34,7 +30,7 @@
 	class="fixed w-1/6 min-w-fit h-full bg-black border-r-2 shadow-lg border-zinc-500"
 	class:open
 >
-	<Sidebar bind:posts />
+	<Sidebar />
 </aside>
 
 <style>
