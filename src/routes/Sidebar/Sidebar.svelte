@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import GenreSelect from './GenreSelect.svelte';
 
@@ -35,6 +33,15 @@
 <div class="p-12 space-y-6">
 	<div>
 		<h2 class="text-lg">Sort Method</h2>
+
+		<select class="select" size="4" value="1">
+			<option value="1">Option 1</option>
+			<option value="2">Option 2</option>
+			<option value="3">Option 3</option>
+			<option value="4">Option 4</option>
+			<option value="5">Option 5</option>
+		</select>
+
 		<ul
 			class="rounded-md border border-secondary-500 overflow-y-auto max-h-[32rem] bg-zinc-900 p-2"
 		>
