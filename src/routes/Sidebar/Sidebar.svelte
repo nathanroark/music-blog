@@ -8,7 +8,7 @@
 	$: sortMethod = query.get('sort') || 'Post';
 	$: filterMethod = query.get('filter') || 'some';
 
-	const filterMethods = ['some', 'every'];
+	let selectedSortMethod = sortMethod;
 
 	const sortMethods = [
 		'Post',
@@ -19,8 +19,8 @@
 		'Release Reverse'
 	];
 
-	function setSortMethod(newSortMethod: string) {
-		query.set('sort', newSortMethod);
+	function setSortMethod() {
+		query.set('sort', selectedSortMethod);
 		goto(`?${query.toString()}`);
 	}
 
@@ -32,31 +32,26 @@
 
 <div class="p-12 space-y-6">
 	<div>
-		<h2 class="text-lg">Sort Method</h2>
-
-		<select class="select" size="4" value="1">
-			<option value="1">Option 1</option>
-			<option value="2">Option 2</option>
-			<option value="3">Option 3</option>
-			<option value="4">Option 4</option>
-			<option value="5">Option 5</option>
-		</select>
-
-		<ul
-			class="rounded-md border border-secondary-500 overflow-y-auto max-h-[32rem] bg-zinc-900 p-2"
-		>
-			{#each sortMethods as item}
-				<li class="flex justify-between inset-2">
-					<button class="w-full p-2 hover:bg-primary-500" on:click={() => setSortMethod(item)}
-						>{item}
-					</button>
-				</li>
-			{/each}
-		</ul>
+		<label class="label">
+			<h4 class="h4">Sort Method</h4>
+			<select
+				class="w-full flex justify-between p-2 rounded-3xl bg-surface-700 hover:bg-surface-600 text-base items-center"
+				bind:value={selectedSortMethod}
+				on:change={setSortMethod}
+			>
+				{#each sortMethods as item}
+					<option value={item}>{item}</option>
+				{/each}
+			</select>
+		</label>
 	</div>
 	<div class="flex flex-col">
-		<span class="text-lg">Filter Method</span>
-		<RadioGroup class="w-fit" active="variant-filled-primary" hover="hover:variant-soft-primary">
+		<h4 class="h4">Genre Filter Method</h4>
+		<RadioGroup
+			class="w-fit border-secondary-500"
+			active="variant-filled-primary"
+			hover="hover:variant-soft-primary"
+		>
 			<RadioItem
 				bind:group={filterMethod}
 				name="justify"

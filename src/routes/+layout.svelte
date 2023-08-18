@@ -1,4 +1,5 @@
 <script>
+	import 'iconify-icon';
 	import '@skeletonlabs/skeleton/themes/theme-crimson.css';
 
 	// This contains the bulk of Skeletons required styles:

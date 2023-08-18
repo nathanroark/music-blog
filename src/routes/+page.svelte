@@ -5,11 +5,10 @@
 	import * as config from '$lib/config';
 	import type { Post } from '$lib/types';
 	import AlbumView from './AlbumView.svelte';
-	import { clsx } from 'clsx';
 	export let data: { posts: Post[] } = { posts: [] };
 
 	$: homepage = $page.url.pathname === '/';
-	$: open = homepage ? false : false;
+	$: open = homepage ? true : false;
 	$: query = new URLSearchParams($page.url.searchParams.toString());
 	$: genres =
 		query
@@ -115,7 +114,7 @@
 	<div class="flex justify-between transition-transform duration-300">
 		{#if open}
 			<div class="drawer" transition:fly={{ x: '-100%' }}>
-				<aside class="pt-4 h-screen w-fit max-w-sm bg-black border-r-2 border-gray-600">
+				<aside class="pt-4 h-screen w-72 lg:w-96 bg-black border-r-2 border-gray-600">
 					<Sidebar />
 				</aside>
 			</div>
