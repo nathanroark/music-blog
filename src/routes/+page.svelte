@@ -8,7 +8,7 @@
 	export let data: { posts: Post[] } = { posts: [] };
 
 	$: homepage = $page.url.pathname === '/';
-	$: open = homepage ? true : false;
+	$: open = false;
 	$: query = new URLSearchParams($page.url.searchParams.toString());
 	$: genres =
 		query
