@@ -8,7 +8,7 @@
 	export let data: { posts: Post[] } = { posts: [] };
 
 	$: homepage = $page.url.pathname === '/';
-	$: open = false;
+	$: open = true;
 	$: query = new URLSearchParams($page.url.searchParams.toString());
 	$: genres =
 		query
@@ -119,7 +119,7 @@
 				</aside>
 			</div>
 		{/if}
-		<main class="overflow-y-auto h-screen transition-transform duration-300">
+		<main class="overflow-y-auto h-screen transition-transform duration-300 no-scrollbar">
 			<AlbumView {posts} />
 		</main>
 	</div>
