@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
 	import GenreSelect from './GenreSelect.svelte';
+	import NativeGenreSelect from './NativeGenreSelect.svelte';
 
 	$: query = new URLSearchParams($page.url.searchParams.toString());
 	$: sortMethod = query.get('sort') || 'Post';
@@ -68,5 +69,9 @@
 	</div>
 	<div>
 		<GenreSelect />
+	</div>
+	<div>
+		<h4 class="h4">Native Genre Select</h4>
+		<NativeGenreSelect />
 	</div>
 </div>
