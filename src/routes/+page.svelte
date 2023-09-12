@@ -95,7 +95,7 @@
 	>
 		{#if homepage}
 			<button
-				class="togglebutton top-0 left-0 p-4 text-gray-100 hover:text-gray-300 cursor-pointer mr-4 border-none focus:outline-none"
+				class="togglebutton top-0 left-0 p-4 text-gray-100 hover:text-zinc-400 cursor-pointer mr-4 border-none focus:outline-none"
 				class:open
 				on:click={() => (open = !open)}
 			>
@@ -106,12 +106,12 @@
 				</svg>
 			</button>
 		{/if}
-		<a href="/" class="font-bold text-lg hover:text-primary-500 sm:text-[1.5rem]">
+		<a href="/" class="font-bold text-lg hover:text-zinc-400 sm:text-[1.5rem]">
 			Nathan's music blog
 		</a>
 	</header>
 
-	<div class="flex justify-between transition-transform duration-300">
+	<div class="flex">
 		{#if open}
 			<div class="drawer" transition:fly={{ x: '-100%' }}>
 				<aside class="pt-4 h-screen w-72 lg:w-96 bg-black border-r-2 border-gray-600">
@@ -119,7 +119,7 @@
 				</aside>
 			</div>
 		{/if}
-		<main class="overflow-y-auto h-screen transition-transform duration-300 no-scrollbar">
+		<main class="overflow-y-auto h-screen no-scrollbar">
 			<AlbumView {posts} />
 		</main>
 	</div>

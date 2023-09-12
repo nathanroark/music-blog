@@ -14,7 +14,7 @@
 		<GenreSelect />
 	</div>
 	<div>
-		<h4 class="h4">Filter Method</h4>
+		<h4 class="h4">Genre Filter Method</h4>
 		<FilterMethod />
 	</div>
 </div>

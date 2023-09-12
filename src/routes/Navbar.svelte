@@ -21,7 +21,7 @@
 			</svg>
 		</button>
 	{/if}
-	<a href="/" class="font-bold text-lg hover:text-primary-500 sm:text-[1.5rem]">
+	<a href="/" class="font-bold text-lg hover:text-gray-700 sm:text-[1.5rem]">
 		Nathan&apos;s <span>music</span> blog
 	</a>
 </header>

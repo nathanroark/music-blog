@@ -14,6 +14,8 @@
 	$: inputChipList = queryGenres.length === 0 ? [] : queryGenres;
 	let inputChip = '';
 
+	$: availableGenres = genreOptions.filter((genre) => !inputChipList.includes(genre.label));
+
 	function handleRemoveGenre(oldGenre: string) {
 		query.set('genres', inputChipList.filter((genre) => genre !== oldGenre).join(','));
 		goto(`?${query.toString()}`);
@@ -38,19 +40,23 @@
 	{#if inputChipList.length === 0}
 		<p>No genres selected</p>
 	{/if}
-	{#each inputChipList as item}
+	<div class="">
+		{#each inputChipList as item}
 		<button
-			class="chip bg-surface-600 hover:bg-primary-600 hover:text-token text-base"
+			class="chip bg-surface-600  hover:bg-red-700 text-base duration-100 ease-in m-1 p-1 group"
 			on:click={() => handleRemoveGenre(item)}
-			><span>{item}</span><iconify-icon icon="tabler:x" /></button
-		>
+			><span class="group-hover:line-through">{item}</span>
+			<div class="chip-icon">x</div>
+			<!-- <iconify-icon class="bg-blue-500" width="20" icon="tabler:x" /> -->
+			</button>
 	{/each}
+	</div>
 	<button on:click={clickHandler} class="dropdown-button"
-		>Genre Select<iconify-icon width="28" icon="zondicons:cheveron-down" /></button
+		>Genre Select<iconify-icon icon="zondicons:cheveron-down" /></button
 	>
 	{#if isExpanded}
 		<ul transition:slide class="no-scrollbar">
-			{#each genreOptions as genre}
+			{#each availableGenres as genre}
 				<li>
 					<button class="list-button" on:click={() => onInputChipSelect(genre.label)}>
 						{genre.label}
@@ -62,6 +68,31 @@
 </nav>
 
 <style>
+.chip {
+  display: inline-block;
+  /* background: $md-chip-color; */
+  padding: 4px 8px;
+  border-radius: 32px;
+  font-size: 16px;
+  &.md-chip-hover:hover {
+    background: #ccc;
+  }
+	cursor: pointer;
+}
+
+.chip-icon {
+  display: block;
+  float: left;
+  /* background: #282828; */
+	/* opacity: 0.5; */
+	/* height: 1.2rem; */
+  width: 1.5rem;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  margin: 0 8px 0 -8px;
+}
+
 	.dropdown-button {
 		background: var(--color-theme-1);
 		border: 0;
