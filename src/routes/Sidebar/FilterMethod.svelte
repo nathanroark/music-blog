@@ -73,7 +73,6 @@
 		margin-right: 10px;
 		background-color: transparent;
 		position: relative;
-		top: 6px;
 	}
 
 	input[type='radio']:checked::before {
@@ -81,7 +80,7 @@
 		display: block;
 		width: 12px;
 		height: 12px;
-		background-color: #ca8489;
+		background-color: var(--color-theme-1);
 		border-radius: 50%;
 		position: absolute;
 		top: 50%;
@@ -91,9 +90,10 @@
 	}
 
 	label {
-		font-size: 24px;
+		font-size: 20px;
 		font-weight: bold;
-		color: #fff;
+		padding-top: 8px;
+		padding-bottom: 8px;
 	}
 
 	label:hover {
@@ -104,28 +104,27 @@
 	div {
 		display: flex;
 		align-items: center;
-		margin-bottom: 20px;
 	}
 
 	@keyframes appear {
 		0% {
 			transform: translate(-50%, -50%) scale(0);
-			background-color: #fff;
+			background-color: aliceblue;
 		}
 		45% {
 			transform: translate(-50%, -50%) scale(1.6);
-			background-color: #64aedf;
+			background-color: var(--color-theme-2);
 		}
 		50% {
 			transform: translate(-50%, -50%) scale(1.7);
-			background-color: #ad97b3;
+			background-color: var(--color-theme-1);
 		}
 		55% {
 			transform: translate(-50%, -50%) scale(1.6);
 		}
 		100% {
 			transform: translate(-50%, -50%) scale(1);
-			background-color: #ca8489;
+			background-color: var(--color-theme-1);
 		}
 	}
 </style>
