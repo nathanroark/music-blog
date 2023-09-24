@@ -1,6 +1,6 @@
 <script lang="ts">
 	//	import { formatDate } from '$lib/utils';
-	import Header from './Header.svelte';
+	// import Header from './Header.svelte';
 	export let data;
 </script>
 
@@ -10,8 +10,8 @@
 	<meta property="og:title" content={data.meta.album} />
 </svelte:head>
 
-<article>
-	<Header />
+<article class=" w-full h-full">
+	<!-- <Header /> -->
 	<div class="pt-[3rem]">
 		<div
 			class="fixed p-3 bg-black md:bg-inherit w-full h-[12rem] md:w-[18rem] md:h-screen md:max-w-xs flex flex-col justify-between md:border-r md:border-zinc-600"
