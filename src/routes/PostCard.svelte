@@ -19,6 +19,7 @@
 		justify-content: space-between;
 		transition: transform 0.3s ease-in-out;
 		color: #eee;
+		min-width: 256px;
 	}
 
 	.card:hover {
